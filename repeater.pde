@@ -2,7 +2,7 @@ class cambelzRepeater{
   cambelz cb1;
   cambelz cb2;
   ArrayList<cambelz> cbList = new ArrayList<cambelz>();
-  int steps = 50;
+  int steps = 100;
   
   cambelzRepeater(){
     PVector beginA = new PVector(-50,0);

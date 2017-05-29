@@ -2,7 +2,7 @@ class cambelz{
   PVector begin,control1,control2,end;
   float minThick = 0.5;
   float maxThick = 7.5;
-  int res = 512;
+  int res = 128;
   
   cambelz(PVector begin_,PVector control1_,PVector control2_,PVector end_){
     begin = begin_;
@@ -31,9 +31,20 @@ class cambelz{
       float tempX= bezierPoint(begin.x,control1.x,control2.x,end.x,map(i,0,this.res,0,1));
       float tempY= bezierPoint(begin.y,control1.y,control2.y,end.y,map(i,0,this.res,0,1));
       float tempX_= bezierPoint(begin.x,control1.x,control2.x,end.x,map(i+1,0,this.res,0,1));
-      float tempY_= bezierPoint(begin.y,control1.y,control2.y,end.y,map(i+1,0,this.res,0,1));;
-      strokeWeight(constrain(map(dist(mouseX,mouseY,tempX,tempY),0,100,maxThick,minThick),minThick,maxThick));
-      line(tempX,tempY,tempX_,tempY_);
+      float tempY_= bezierPoint(begin.y,control1.y,control2.y,end.y,map(i+1,0,this.res,0,1));
+      //Mouse distance based
+      //strokeWeight(constrain(map(dist(mouseX,mouseY,tempX,tempY),0,100,maxThick,minThick),minThick,maxThick));
+      int c = int(tempY)*width+int(tempX);
+      
+      //bg brightness based
+      if(c<0 || c>pixels.length){
+        //strokeWeight(minThick);
+        //line(tempX,tempY,tempX_,tempY_);
+      }else{
+        float b = brightness(pixels[c]);
+        strokeWeight(map(b,255,0,minThick,maxThick));
+        line(tempX,tempY,tempX_,tempY_);
+      }
     }
   }
 }
