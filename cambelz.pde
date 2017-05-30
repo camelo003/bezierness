@@ -1,8 +1,8 @@
 class cambelz{
   PVector begin,control1,control2,end;
   float minThick = 0.5;
-  float maxThick = 7.5;
-  int res = 128;
+  float maxThick = 3;
+  int res = 256;
   
   cambelz(PVector begin_,PVector control1_,PVector control2_,PVector end_){
     begin = begin_;
@@ -34,9 +34,9 @@ class cambelz{
       float tempY_= bezierPoint(begin.y,control1.y,control2.y,end.y,map(i+1,0,this.res,0,1));
       //Mouse distance based
       //strokeWeight(constrain(map(dist(mouseX,mouseY,tempX,tempY),0,100,maxThick,minThick),minThick,maxThick));
-      int c = int(tempY)*width+int(tempX);
       
       //bg brightness based
+      int c = int(tempY)*width+int(tempX);
       if(c<0 || c>pixels.length){
         //strokeWeight(minThick);
         //line(tempX,tempY,tempX_,tempY_);
